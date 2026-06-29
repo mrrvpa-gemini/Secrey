@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dark Universe</string>
+    <string name="login_title">Dark Universe</string>
+    <string name="login_subtitle">Bug Panel v1.0</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="register_hint">Daftar via @Rvpa_jomok</string>
+    <string name="owner_id">8469659582</string>
+    <string name="bot_token">8774991694:AAG7Yp8v8nnvQg2lLLB_sTuVF2_-CltPUNg</string>
+    <string name="card_title">Dark Universe</string>
+    <string name="card_subtitle">Bug Panel by @Rvpa_jomok</string>
+</resources>

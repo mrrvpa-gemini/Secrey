@@ -1,0 +1,49 @@
+name: Build Dark Universe APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Build APK
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: DarkUniverse-APK
+          path: app/build/outputs/apk/release/*.apk
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: app/build/outputs/apk/release/*.apk
+          tag: v1.0.${{ github.run_number }}
+          name: Dark Universe v1.0.${{ github.run_number }}
+          body: |
+            ## Dark Universe APK
+            - Build: ${{ github.run_number }}
+            - Author: @Rvpa_jomok
+          token: ${{ secrets.GITHUB_TOKEN }}
